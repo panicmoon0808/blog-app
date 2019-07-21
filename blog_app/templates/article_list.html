@@ -1,0 +1,29 @@
+
+{% load static from staticfiles%}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Articles</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+<h1>Recipe List</h1><br />
+
+<a href="{% url 'blog:article-add' %}" class="btn btn-success">Add A Recipe</a> <br /><br />
+
+<div class="articles">
+	{%for article in articles%}
+		<div class="article">
+			<h2><a href="{% url 'blog:article-details' slug=article.slug %}">{{article.title}}</a></h2>
+
+			<a href="{% url 'blog:article-update' slug=article.slug %}" class="btn btn-primary" >Update Recipe</a>
+			<a href="{% url 'blog:article-delete' slug=article.slug %}" class="btn btn-danger">Delete Recipe</a>
+			<p>	&emsp; {{article.snippet}}</p>
+
+		</div>
+		{% endfor %}
+	</div>
+</body>
+</html>

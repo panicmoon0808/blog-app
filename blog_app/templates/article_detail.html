@@ -1,0 +1,38 @@
+
+{%extends 'base_layout.html'%}
+
+{% block content %}
+
+<div class="article-detail">
+	<div class="article">
+	<a href="{% url 'blog:article-list' %}"class="btn btn-primary">Return</a>
+	<h1>{{article.title }}</h1>
+	<p>Last Updated: {{article.date }}</p>
+	<br / >
+	<h4> {{article.body | linebreaks}}</h4>
+	<br / >
+	<br / >
+	<h3> INGREDIENTS </h3>
+	<p>{{article.ingredients | linebreaks}}</p>
+	<br / >
+	<h3> INSTRUCTIONS </h3>
+	<p>{{article.instructions | linebreaks}}</p>
+	</div>
+</div>
+<br / >
+<h3> COMMENTS </h3>
+<table class="table table-striped">
+  <tbody>
+  	{%for comment in article.comments.all%}
+    <tr>
+  		<td>
+  			<p>Author: {{comment.author}}</p>
+  			<p>{{comment.content}}</p>
+  		</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</div>
+</table>
+<a href="{% url 'blog:article-comment-add' slug=article.slug %}"class="btn btn-success">Add Comment</a>
+{% endblock %}
